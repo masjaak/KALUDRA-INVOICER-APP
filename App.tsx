@@ -113,7 +113,7 @@ const LoginView: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 font-poppins text-black animate-in fade-in duration-500">
       <div className="w-full max-w-md bg-white border border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <div className="text-center mb-8">
-            <img src="https://i.ibb.co.com/Zz2QJK8b/Kaludra-Logo.png" alt="Kaludra" className="h-16 mx-auto mb-6 object-contain grayscale" />
+            <img src="https://i.ibb.co.com/pjhHPZzk/Kaludra-Logo.png" alt="Kaludra" className="h-16 mx-auto mb-6 object-contain grayscale" />
             <h1 className="text-2xl font-bold tracking-widest uppercase">Employee Login</h1>
             <p className="text-xs text-gray-500 mt-2 uppercase tracking-wide">Kaludra Invoicer Dashboard</p>
         </div>
@@ -154,13 +154,13 @@ const InvoicePaper: React.FC<{
   total: number 
 }> = ({ invoice, client, total }) => {
   return (
-    <div className="bg-white w-full max-w-[210mm] min-h-[297mm] p-[1.6cm] shadow-xl border border-gray-200 print:shadow-none print:border-none flex flex-col justify-between text-black print:w-full">
+    <div className="bg-white w-full max-w-[210mm] min-h-[297mm] p-[1.6cm] shadow-xl border border-gray-200 print:shadow-none print:border-none print:m-0 flex flex-col justify-between text-black print:w-full">
       {/* INVOICE CONTENT */}
       <div>
         {/* Header */}
         <div className="flex flex-col items-center justify-center mb-12 text-center border-b-2 border-black pb-6">
           <img 
-            src="https://i.ibb.co.com/Zz2QJK8b/Kaludra-Logo.png" 
+            src="https://i.ibb.co.com/pjhHPZzk/Kaludra-Logo.png" 
             alt="Company Logo" 
             className="h-16 object-contain grayscale"
           />
@@ -731,7 +731,7 @@ const App: React.FC = () => {
         </div>
 
         {/* RIGHT PANEL - PREVIEW */}
-        <div className="w-full xl:w-2/3 bg-gray-100 p-4 md:p-8 overflow-y-auto no-scrollbar flex justify-center print:p-0 print:bg-white print:w-full print:block">
+        <div className="w-full xl:w-2/3 bg-gray-100 p-4 md:p-8 overflow-y-auto no-scrollbar flex justify-center print:p-0 print:bg-white print:w-full print:block print:h-auto print:overflow-visible">
           {/* Reuse Invoice Paper */}
           <InvoicePaper invoice={activeInvoice} client={selectedClient} total={invoiceTotal} />
         </div>
@@ -770,7 +770,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Invoice Paper (Centered) */}
-        <div className="flex-1 overflow-auto flex justify-center bg-gray-100 p-8 print:p-0 print:bg-white print:block">
+        <div className="flex-1 overflow-auto flex justify-center bg-gray-100 p-8 print:p-0 print:bg-white print:block print:h-auto print:overflow-visible">
              <InvoicePaper invoice={activeInvoice} client={selectedClient} total={invoiceTotal} />
         </div>
       </div>
@@ -859,12 +859,16 @@ const App: React.FC = () => {
                 <p className="truncate">{client.address || 'No address'}</p>
               </div>
               <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
-                <button 
-                  onClick={() => handleDeleteClient(client.id)}
-                  className="text-red-500 text-xs font-bold hover:underline"
+                <Button 
+                  variant="danger"
+                  className="px-3 py-1 text-xs"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteClient(client.id);
+                  }}
                 >
-                  REMOVE
-                </button>
+                  <Trash2 size={12} /> DELETE
+                </Button>
               </div>
             </Card>
           ))}
@@ -991,7 +995,7 @@ const App: React.FC = () => {
   // --- Layout Render ---
 
   return (
-    <div className="min-h-screen bg-white text-black font-poppins flex flex-col md:flex-row">
+    <div className="min-h-screen bg-white text-black font-poppins flex flex-col md:flex-row print:block print:h-auto print:overflow-visible">
       
       {/* Mobile Header */}
       <div className="md:hidden flex justify-between items-center p-4 border-b border-black bg-white sticky top-0 z-20 no-print">
@@ -1057,8 +1061,8 @@ const App: React.FC = () => {
       </aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-auto bg-white relative h-screen">
-        <div className="p-4 md:p-8 h-full max-w-7xl mx-auto">
+      <main className="flex-1 overflow-auto bg-white relative h-screen print:h-auto print:overflow-visible print:block">
+        <div className="p-4 md:p-8 h-full max-w-7xl mx-auto print:p-0 print:h-auto">
           {view === 'dashboard' && <DashboardView />}
           {view === 'create-invoice' && <EditorView />}
           {view === 'view-invoice' && <ViewInvoice />}

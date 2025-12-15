@@ -17,11 +17,26 @@
       }
       /* Print specific overrides to hide UI and show only invoice */
       @media print {
-        @page { margin: 0; }
-        body { margin: 1.6cm; }
+        @page { margin: 0; size: auto; }
+        html, body { 
+          height: auto !important; 
+          overflow: visible !important; 
+          background: white !important;
+        }
+        #root {
+          height: auto !important;
+          overflow: visible !important;
+        }
         .no-print { display: none !important; }
-        .print-only { display: block !important; width: 100% !important; height: auto !important; overflow: visible !important; }
+        .print-only { display: block !important; }
         .print-break-inside { break-inside: avoid; }
+        
+        /* Ensure specific containers don't clip content */
+        main {
+          height: auto !important;
+          overflow: visible !important;
+          display: block !important;
+        }
       }
     </style>
     <script>

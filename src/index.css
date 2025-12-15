@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #000000;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Print specific overrides */
+@media print {
+  @page { margin: 0; size: auto; }
+  
+  html, body { 
+    height: auto !important; 
+    overflow: visible !important; 
+    background: white !important;
+  }
+  
+  #root {
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .print-break-inside { break-inside: avoid; }
+  
+  main {
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  
+  .print\:bg-white { background-color: white !important; }
+}
