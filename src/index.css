@@ -5,15 +5,15 @@
 @tailwind utilities;
 
 @layer base {
-  body {
+  html {
     font-family: 'Poppins', sans-serif;
-    background-color: #ffffff;
-    color: #000000;
-    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-white text-black antialiased;
   }
 }
 
-/* Print specific overrides */
+/* Print specific overrides to hide UI and show only invoice */
 @media print {
   @page { margin: 0; size: auto; }
   
@@ -32,10 +32,13 @@
   .print-only { display: block !important; }
   .print-break-inside { break-inside: avoid; }
   
+  /* Ensure main container expands and hides UI elements */
   main {
     height: auto !important;
     overflow: visible !important;
     display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   
   .print\:bg-white { background-color: white !important; }

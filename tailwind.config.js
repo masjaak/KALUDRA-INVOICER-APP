@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        // Sets Poppins as the default font for the app
         sans: ['Poppins', 'sans-serif'],
+        // Ensures 'font-poppins' class used in App.tsx works explicitly
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
